@@ -1,6 +1,7 @@
 {
   "version": "5",
   "specifiers": {
+    "npm:@monaco-editor/react@^4.7.0": "4.7.0_monaco-editor@0.52.2_react@18.3.1_react-dom@18.3.1__react@18.3.1",
     "npm:@tailwindcss/vite@^4.1.8": "4.1.8_vite@6.3.5__picomatch@4.0.2",
     "npm:@tauri-apps/api@2": "2.5.0",
     "npm:@tauri-apps/cli@2": "2.5.0",
@@ -9,8 +10,10 @@
     "npm:@types/react@^18.3.1": "18.3.23",
     "npm:@vitejs/plugin-react@^4.3.4": "4.5.2_vite@6.3.5__picomatch@4.0.2_@babel+core@7.27.4",
     "npm:allotment@^1.20.3": "1.20.3_react@18.3.1_react-dom@18.3.1__react@18.3.1",
+    "npm:clsx@^2.1.1": "2.1.1",
     "npm:react-dom@^18.3.1": "18.3.1_react@18.3.1",
     "npm:react@^18.3.1": "18.3.1",
+    "npm:tailwind-merge@^3.3.0": "3.3.0",
     "npm:tailwindcss@^4.1.8": "4.1.8",
     "npm:typescript@~5.6.2": "5.6.3",
     "npm:vite@^6.0.3": "6.3.5_picomatch@4.0.2"
@@ -333,6 +336,21 @@
     },
     "@juggle/resize-observer@3.4.0": {
       "integrity": "sha512-dfLbk+PwWvFzSxwk3n5ySL0hfBog779o8h68wK/7/APo/7cgyWp5jcXockbxdk5kFRkbeXWm4Fbi9FrdN381sA=="
+    },
+    "@monaco-editor/loader@1.5.0": {
+      "integrity": "sha512-hKoGSM+7aAc7eRTRjpqAZucPmoNOC4UUbknb/VNoTkEIkCPhqV8LfbsgM1webRM7S/z21eHEx9Fkwx8Z/C/+Xw==",
+      "dependencies": [
+        "state-local"
+      ]
+    },
+    "@monaco-editor/react@4.7.0_monaco-editor@0.52.2_react@18.3.1_react-dom@18.3.1__react@18.3.1": {
+      "integrity": "sha512-cyzXQCtO47ydzxpQtCGSQGOC8Gk3ZUeBXFAxD+CWXYFo5OqZyZUonFl0DwUlTyAfRHntBfw2p3w4s9R6oe1eCA==",
+      "dependencies": [
+        "@monaco-editor/loader",
+        "monaco-editor",
+        "react",
+        "react-dom"
+      ]
     },
     "@napi-rs/wasm-runtime@0.2.11": {
       "integrity": "sha512-9DPkXtvHydrcOsopiYpUgPHpmj0HWZKMUnL2dZqpvC42lsratuBG06V5ipyno0fUek5VlFsNQ+AcFATSrJXgMA==",
@@ -734,6 +752,9 @@
     "classnames@2.5.1": {
       "integrity": "sha512-saHYOzhIQs6wy2sVxTM6bUDsQO4F50V9RQ22qBpEdCW+I+/Wmke2HOl6lS6dTpdxVhb88/I6+Hs+438c3lfUow=="
     },
+    "clsx@2.1.1": {
+      "integrity": "sha512-eYm0QWBtUrBWZWG0d386OGAw16Z995PiOVo2B7bjWSbHedGl5e0ZWaq65kOGgUSNesEIDkB9ISbTg/JK9dhCZA=="
+    },
     "convert-source-map@2.0.0": {
       "integrity": "sha512-Kvp459HrV2FEJ1CAsi1Ku+MY3kasH19TFykTz2xWmMeq6bk2NU3XXvfJ+Q61m0xktWwt+1HSYf3JZsTms3aRJg=="
     },
@@ -945,6 +966,9 @@
       "integrity": "sha512-+NsyUUAZDmo6YVHzL/stxSu3t9YS1iljliy3BSDrXJ/dkn1KYdmtZODGGjLcc9XLgVVpH4KshHB8XmZgMhaBXg==",
       "bin": true
     },
+    "monaco-editor@0.52.2": {
+      "integrity": "sha512-GEQWEZmfkOGLdd3XK8ryrfWz3AIP8YymVXiPHEdewrUq7mh0qrKrfHLNCXcbB6sTnMLnOZ3ztSiKcciFUkIJwQ=="
+    },
     "ms@2.1.3": {
       "integrity": "sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA=="
     },
@@ -1029,6 +1053,12 @@
     "source-map-js@1.2.1": {
       "integrity": "sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA=="
     },
+    "state-local@1.0.7": {
+      "integrity": "sha512-HTEHMNieakEnoe33shBYcZ7NX83ACUjCu8c40iOGEZsngj9zRnkqS9j1pqQPXwobB0ZcVTk27REb7COQ0UR59w=="
+    },
+    "tailwind-merge@3.3.0": {
+      "integrity": "sha512-fyW/pEfcQSiigd5SNn0nApUOxx0zB/dm6UDU/rEwc2c3sX2smWUNbapHv+QRqLGVp9GWX3THIa7MUGPo+YkDzQ=="
+    },
     "tailwindcss@4.1.8": {
       "integrity": "sha512-kjeW8gjdxasbmFKpVGrGd5T4i40mV5J2Rasw48QARfYeQ8YS9x02ON9SFWax3Qf616rt4Cp3nVNIj6Hd1mP3og=="
     },
@@ -1102,6 +1132,7 @@
   "workspace": {
     "packageJson": {
       "dependencies": [
+        "npm:@monaco-editor/react@^4.7.0",
         "npm:@tailwindcss/vite@^4.1.8",
         "npm:@tauri-apps/api@2",
         "npm:@tauri-apps/cli@2",
@@ -1110,8 +1141,10 @@
         "npm:@types/react@^18.3.1",
         "npm:@vitejs/plugin-react@^4.3.4",
         "npm:allotment@^1.20.3",
+        "npm:clsx@^2.1.1",
         "npm:react-dom@^18.3.1",
         "npm:react@^18.3.1",
+        "npm:tailwind-merge@^3.3.0",
         "npm:tailwindcss@^4.1.8",
         "npm:typescript@~5.6.2",
         "npm:vite@^6.0.3"

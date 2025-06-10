@@ -1,14 +1,27 @@
 import { Allotment } from "allotment";
+import SlideBar from "./components/layout/slide-bar";
+import Branch from "./components/layout/branch";
+import { useState } from "react";
 
 export default function App() {
+  const [fileContent, setFileContent] = useState("");
+
+  const handleChangeFileContent = (content: string) => setFileContent(content);
+
   return (
     <div className="bg-primary h-screen flex flex-col">
-      <Allotment defaultSizes={[250, 500]}>
+      <Allotment defaultSizes={[100, 500]}>
         <Allotment.Pane minSize={160}>
-          <div className="">file list</div>
+          <SlideBar onChangeFileContent={handleChangeFileContent} />
         </Allotment.Pane>
-        <Allotment.Pane snap>
-          <div>file content</div>
+        <Allotment.Pane minSize={200}>
+          {fileContent ? (
+            <Branch fileContent={fileContent} />
+          ) : (
+            <div className="flex items-center justify-center h-full">
+              <div className="text-zinc-400">No File Selected</div>
+            </div>
+          )}
         </Allotment.Pane>
       </Allotment>
     </div>

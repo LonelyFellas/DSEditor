@@ -18,7 +18,7 @@ struct File {
 
 #[tauri::command]
 fn query_dir(path: Option<String>) -> Option<Vec<File>> {
-    let dir_path = path.unwrap_or_else(|| "./".to_string());
+    let dir_path = path.unwrap_or_else(|| "/Users/worksapce/Dev/tauri-demo".to_string());
     let mut files: Vec<File> = Vec::new();
     if let Ok(entries) = std::fs::read_dir(dir_path) {
         for entry in entries {

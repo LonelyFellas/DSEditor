@@ -10,12 +10,15 @@
     "tauri": "tauri"
   },
   "dependencies": {
+    "@monaco-editor/react": "^4.7.0",
     "@tailwindcss/vite": "^4.1.8",
     "allotment": "^1.20.3",
+    "clsx": "^2.1.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "@tauri-apps/api": "^2",
     "@tauri-apps/plugin-opener": "^2",
+    "tailwind-merge": "^3.3.0",
     "tailwindcss": "^4.1.8"
   },
   "devDependencies": {
