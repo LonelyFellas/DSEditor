@@ -20,26 +20,41 @@ struct File {
 fn query_dir(path: Option<String>) -> Option<Vec<File>> {
     let dir_path = path.unwrap_or_else(|| "/Users/worksapce/Dev/tauri-demo".to_string());
     let mut files: Vec<File> = Vec::new();
+    let mut dir_files: Vec<File> = Vec::new(); // 目录
+    let mut file_files: Vec<File> = Vec::new(); // 文件
+
     if let Ok(entries) = std::fs::read_dir(dir_path) {
         for entry in entries {
             if let Ok(entry) = entry {
                 if let Ok(metadata) = entry.path().metadata() {
-                    files.push(File {
-                        name: entry
-                            .path()
-                            .file_name()
-                            .unwrap()
-                            .to_str()
-                            .unwrap()
-                            .to_string(),
-                        path: entry.path().display().to_string(),
-                        is_dir: entry.path().is_dir(),
+                    let path = entry.path();
+                    let file = File {
+                        name: path.file_name().unwrap().to_str().unwrap().to_string(),
+                        path: path.display().to_string(),
+                        is_dir: path.is_dir(),
                         size: metadata.len(),
                         last_modified: metadata.modified().unwrap_or(SystemTime::now()),
-                    });
+                    };
+
+                    if path.is_dir() {
+                        dir_files.push(file);
+                    } else {
+                        file_files.push(file);
+                    }
                 }
             }
         }
+
+        // 目录优先，且目录和文件都按字幕排序排序
+        dir_files.sort_by(|a, b| a.name.to_lowercase().cmp(&b.name.to_lowercase()));
+        file_files.sort_by(|a, b| a.name.to_lowercase().cmp(&b.name.to_lowercase()));
+
+        // // 读取配置文件settings
+        // let settings = std::fs::read_to_string().unwrap_or_default();
+        // println!("settings: {:?}", settings);
+
+        files.extend(dir_files);
+        files.extend(file_files);
         Some(files)
     } else {
         None
