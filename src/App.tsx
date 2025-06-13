@@ -2,8 +2,10 @@ import { Allotment } from "allotment";
 import SlideBar from "./components/layout/slide-bar";
 import Branch from "./components/layout/branch";
 import { useState } from "react";
+import useContextMenu from "./hooks/useContextMenu";
 
 export default function App() {
+  useContextMenu(); // 全局关闭右键菜单
   const [fileContent, setFileContent] = useState("");
 
   const handleChangeFileContent = (content: string) => setFileContent(content);

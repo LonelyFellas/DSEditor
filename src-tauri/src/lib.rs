@@ -1,4 +1,5 @@
 // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
+use glob::Pattern;
 use serde::{Deserialize, Serialize};
 use std::{fs, time::SystemTime};
 
@@ -59,10 +60,25 @@ fn query_dir(path: Option<String>) -> Option<Vec<File>> {
         // let settings = std::fs::read_to_string().unwrap_or_default();
         // println!("settings: {:?}", settings);
         if let Some(settings_content) = read_resource("./resources/settings.json".to_string()) {
-            println!("settings_content: {:?}", settings_content);
             // 解析配置文件
             let settings: Settings = serde_json::from_str(&settings_content).unwrap();
-            println!("files_exclude: {:?}", settings.files_exclude);
+
+            // 过滤掉配置文件中排除的文件
+            // 过滤规则跟gitignore一样
+            let should_exclude = |file_path: &str| {
+                settings.files_exclude.iter().any(|pattern| {
+                    if let Ok(glob_pattern) = Pattern::new(pattern) {
+                        glob_pattern.matches(file_path)
+                    } else {
+                        false
+                    }
+                })
+            };
+
+            // 过滤目录
+            dir_files.retain(|file| !should_exclude(&file.path));
+            // 过滤文件
+            file_files.retain(|file| !should_exclude(&file.path));
         } else {
             println!("settings_content: {:?}", "not found");
         }

@@ -1,6 +1,7 @@
 {
   "files.exclude": [
   "**/.git",
+  "**/.idea",
   "**/.svn",
   "**/.hg",
   "**/CVS",
