@@ -1,6 +1,12 @@
 // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
 use serde::{Deserialize, Serialize};
-use std::time::SystemTime;
+use std::{fs, time::SystemTime};
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct Settings {
+    #[serde(rename = "files.exclude")]
+    pub files_exclude: Vec<String>,
+}
 
 #[tauri::command]
 fn greet(name: &str) -> String {
@@ -23,7 +29,7 @@ fn query_dir(path: Option<String>) -> Option<Vec<File>> {
     let mut dir_files: Vec<File> = Vec::new(); // 目录
     let mut file_files: Vec<File> = Vec::new(); // 文件
 
-    if let Ok(entries) = std::fs::read_dir(dir_path) {
+    if let Ok(entries) = fs::read_dir(dir_path) {
         for entry in entries {
             if let Ok(entry) = entry {
                 if let Ok(metadata) = entry.path().metadata() {
@@ -52,6 +58,14 @@ fn query_dir(path: Option<String>) -> Option<Vec<File>> {
         // // 读取配置文件settings
         // let settings = std::fs::read_to_string().unwrap_or_default();
         // println!("settings: {:?}", settings);
+        if let Some(settings_content) = read_resource("./resources/settings.json".to_string()) {
+            println!("settings_content: {:?}", settings_content);
+            // 解析配置文件
+            let settings: Settings = serde_json::from_str(&settings_content).unwrap();
+            println!("files_exclude: {:?}", settings.files_exclude);
+        } else {
+            println!("settings_content: {:?}", "not found");
+        }
 
         files.extend(dir_files);
         files.extend(file_files);
@@ -61,9 +75,19 @@ fn query_dir(path: Option<String>) -> Option<Vec<File>> {
     }
 }
 
+/// 读取文件内容
 #[tauri::command]
 fn read_file_content(path: String) -> Option<String> {
-    if let Ok(content) = std::fs::read_to_string(path) {
+    if let Ok(content) = fs::read_to_string(path) {
+        Some(content)
+    } else {
+        None
+    }
+}
+
+/// 读取静态资源
+fn read_resource(path: String) -> Option<String> {
+    if let Ok(content) = fs::read_to_string(path) {
         Some(content)
     } else {
         None
