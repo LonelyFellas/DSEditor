@@ -14,7 +14,8 @@
       {
         "title": "tauri-demo",
         "width": 1400,
-        "height": 900 
+        "height": 900,
+        "devtools": true 
       }
     ],
     "security": {
@@ -33,7 +34,7 @@
       "icons/icon.ico"
     ],
     "resources": {
-      "resources/*": "resources/*"
+      "resources/*": "resources"
     } 
   }
 }

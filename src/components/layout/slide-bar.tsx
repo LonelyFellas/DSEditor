@@ -109,8 +109,15 @@ export default function SlideBar({ onChangeFileContent }: SlideBarProps) {
     });
   };
 
+  const handleContextMenu = (e: React.MouseEvent<HTMLDivElement>) => {
+    console.log(e);
+  };
+
   return (
-    <div className="bg-zinc-900 text-zinc-200 h-full overflow-y-auto text-sm p-2">
+    <div
+      onContextMenu={handleContextMenu}
+      className="bg-zinc-900 text-zinc-200 h-full overflow-y-auto text-sm p-2"
+    >
       <FileTree
         files={files}
         onFileClick={handleFileClick}

@@ -1,14 +1,20 @@
 import { Allotment } from "allotment";
 import SlideBar from "./components/layout/slide-bar";
 import Branch from "./components/layout/branch";
-import { useState } from "react";
-import useContextMenu from "./hooks/useContextMenu";
+import { useEffect, useState } from "react";
+import { invoke } from "@tauri-apps/api/core";
 
 export default function App() {
-  useContextMenu(); // 全局关闭右键菜单
   const [fileContent, setFileContent] = useState("");
 
   const handleChangeFileContent = (content: string) => setFileContent(content);
+
+  useEffect(() => {
+    // 获取当前所有环境变量
+    invoke("get_env", { key: "NODE_ENV" }).then((res) => {
+      console.log(res);
+    });
+  }, []);
 
   return (
     <div className="bg-primary h-screen flex flex-col">

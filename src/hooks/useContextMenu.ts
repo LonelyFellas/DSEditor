@@ -1,16 +1,16 @@
-import { useEffect } from "react";
+// import { useEffect } from "react";
 
-export default function useContextMenu() {
+// export default function useContextMenu() {
 
-  useEffect(() => {
-    const handleContextMenu = (e: MouseEvent) => {
-      e.preventDefault();
-    };
+//   useEffect(() => {
+//     const handleContextMenu = (e: MouseEvent) => {
+//       e.preventDefault();
+//     };
 
-    window.addEventListener("contextmenu", handleContextMenu);
+//     window.addEventListener("contextmenu", handleContextMenu);
 
-    return () => {
-      window.removeEventListener("contextmenu", handleContextMenu);
-    };
-  })
-}
+//     return () => {
+//       window.removeEventListener("contextmenu", handleContextMenu);
+//     };
+//   })
+// }

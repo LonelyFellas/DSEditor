@@ -110,6 +110,23 @@ fn read_resource(path: String) -> Option<String> {
     }
 }
 
+#[derive(Serialize, Deserialize)]
+struct Var {
+    key: String,
+    value: String,
+}
+
+/// 读取当前环境变量
+#[tauri::command]
+fn get_env(key: &str) -> Vec<Var> {
+    let envs = std::env::vars();
+    let mut vars: Vec<Var> = Vec::new();
+    for (key, value) in envs {
+        vars.push(Var { key, value });
+    }
+    vars
+}
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
@@ -117,7 +134,8 @@ pub fn run() {
         .invoke_handler(tauri::generate_handler![
             greet,
             query_dir,
-            read_file_content
+            read_file_content,
+            get_env,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
